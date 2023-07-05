@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Logo from './src/components/LogoComponents';
+import Textbox, { TypeTextBox } from './src/components/TextboxComponents';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Logo />
+      <Textbox mode={TypeTextBox.PASSWORD} />
     </View>
   );
 }
