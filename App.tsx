@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Textbox, { TypeTextBox } from './src/components/TextboxComponents';
+import OwnButton from './src/components/ButtonComponents';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Textbox mode={TypeTextBox.PASSWORD} />
+      <OwnButton action={() => { }} name='connexion' />
     </View>
   );
 }
