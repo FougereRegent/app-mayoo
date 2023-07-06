@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text, TouchableOpacityProps } from 
 
 type ButtonProps = {
   name: string,
-  action: any
+  action(): void
 }
 
 const OwnButton = (props: ButtonProps) => {
