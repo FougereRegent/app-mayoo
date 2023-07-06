@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text, TouchableOpacityProps } from 
 
 type ButtonProps = {
   name: string,
-  action: Function
+  action: any
 }
 
 const OwnButton = (props: ButtonProps) => {
@@ -11,9 +11,7 @@ const OwnButton = (props: ButtonProps) => {
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => {
-        props.action();
-      }}>
+      onPress={props.action}>
       <View>
         <Text style={styles.text}>
           {props.name.toUpperCase()}
