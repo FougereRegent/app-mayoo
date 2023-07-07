@@ -29,7 +29,7 @@ const Textbox = (props: TextboxProps) => {
       const [password, setPassword] = useState('');
       result = (
         <View style={styles.container}>
-          <Image source={require('../../assets/mayoo/login.png')}
+          <Image source={require('../../assets/mayoo/lock.png')}
             style={styles.img} />
           <TextInput
             placeholder='Mot de passe'
@@ -78,7 +78,7 @@ const styles: any = StyleSheet.create(
     },
     img: {
       marginHorizontal: 5,
-      width: 20,
+      width: 15,
       height: 20
     },
     textbox: {

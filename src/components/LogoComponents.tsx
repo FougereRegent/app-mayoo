@@ -17,17 +17,16 @@ const Logo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 120,
   },
   img: {
     width: 65,
-    height: 65,
+    height: 80,
   },
   text: {
-    marginTop: 10,
+    marginTop: 5,
     color: 'gray',
     textAlign: 'center',
     fontSize: 25,
