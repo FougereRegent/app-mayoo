@@ -3,7 +3,6 @@ MAINTAINER Venant-Valery Damien
 
 WORKDIR /app
 
-COPY ./assets assets
 COPY ./app.json .
 COPY ./babel.config.js .
 COPY ./package.json .
@@ -12,6 +11,7 @@ COPY ./tsconfig.json .
 
 RUN npm install
 
+COPY ./assets assets
 COPY ./src src
 COPY ./App.tsx .
 
