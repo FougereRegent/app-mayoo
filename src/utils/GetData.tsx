@@ -1,5 +1,3 @@
-import { createNavigatorFactory } from "@react-navigation/native";
-
 type Credentials = {
   username: string,
   password: string
