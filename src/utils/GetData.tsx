@@ -39,8 +39,6 @@ export class ProxyServiceToken implements IServiceToken {
 }
 
 class ServiceToken implements IServiceToken {
-  private credential?: Credentials;
-
   getToken(credential: Credentials): string {
     return "";
   }
