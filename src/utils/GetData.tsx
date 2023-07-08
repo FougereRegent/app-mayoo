@@ -1,52 +1,47 @@
+import { createNavigatorFactory } from "@react-navigation/native";
+
 type Credentials = {
   username: string,
   password: string
 };
 
 interface IServiceToken {
-  getToken(): string
-  setCredentials(credentials: Credentials): void
-  isValidToken(credentials: Credentials): boolean
+  getToken(credential: Credentials): string
 }
 
 
 export class ProxyServiceToken implements IServiceToken {
-  private credential: Credentials[];
+  private static credentials?: Credentials;
+  private static token: string;
   private service: IServiceToken;
+
+  private checkIfTokenExist(credential: Credentials): boolean {
+    return false;
+  }
 
   constructor(service: IServiceToken) {
     this.service = service;
-    this.credential = new Array();
   }
 
-  getToken(): string {
-    return "";
-  }
-
-  setCredentials(credentials: Credentials): void {
-    if (this.credential.indexOf(credentials) === -1) {
-      this.credential.push(credentials);
+  getToken(credential: Credentials): string {
+    if (this.checkIfTokenExist(credential)) {
+      return ProxyServiceToken.token;
     }
-  }
 
-  isValidToken(credentials: Credentials): boolean {
-    return false;
+    let result_token: string = this.service.getToken(credential);
+    if (result_token !== "") {
+      ProxyServiceToken.token = result_token;
+      ProxyServiceToken.credentials = credential;
+      return "";
+    }
+    return ProxyServiceToken.token;
   }
 }
 
 class ServiceToken implements IServiceToken {
   private credential?: Credentials;
 
-  getToken(): string {
+  getToken(credential: Credentials): string {
     return "";
   }
-
-  setCredentials(credentials: Credentials): void {
-
-  }
-
-  isValidToken(credentials: Credentials): boolean {
-    return false;
-  }
-
 }
