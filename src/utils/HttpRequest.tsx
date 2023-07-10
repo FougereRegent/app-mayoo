@@ -15,8 +15,18 @@ type HttpOption = {
 };
 
 class HttpRequest {
-  option?: HttpOption;
-  url?: string;
+  public option: HttpOption;
+  public url: string;
+
+  public constructor() {
+    this.option = {
+      method: "",
+      headers: {},
+      body: ""
+    };
+
+    this.url = "";
+  }
 }
 
 export interface IBuilderHttpRequest {
@@ -30,23 +40,49 @@ export interface IBuilderHttpRequest {
 
 export class BuilderHttpRequest implements IBuilderHttpRequest {
 
+  private httpRequest: HttpRequest;
+
+  constructor() {
+    this.httpRequest = new HttpRequest();
+  }
+
   setMethod(method: HttpMethod): IBuilderHttpRequest {
-    throw new Error("Not Implemented");
+    switch (method) {
+      case HttpMethod.GET:
+        this.httpRequest.option.method = "GET";
+        break;
+      case HttpMethod.PUT:
+        this.httpRequest.option.method = "PUT";
+        break;
+      case HttpMethod.HEAD:
+        this.httpRequest.option.method = "HEAD";
+        break;
+      case HttpMethod.POST:
+        this.httpRequest.option.method = "POST";
+        break;
+      case HttpMethod.DELETE:
+        this.httpRequest.option.method = "DELETE";
+        break;
+    }
+    return this;
   }
 
   setUrl(url: string): IBuilderHttpRequest {
-    throw new Error("Not Implemented");
+    this.httpRequest.url = url;
+    return this;
   }
 
   setBody(body: any): IBuilderHttpRequest {
-    throw new Error("Not Implemented");
+    this.httpRequest.option.body = body;
+    return this;
   }
 
   setHeaders(header: any): IBuilderHttpRequest {
-    throw new Error("Not Implemented");
+    this.httpRequest.option.headers = header;
+    return this;
   }
 
   getHttpRequest(): HttpRequest {
-    throw new Error("Not Implemented");
+    return this.httpRequest;
   }
 }
