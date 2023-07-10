@@ -86,3 +86,21 @@ export class BuilderHttpRequest implements IBuilderHttpRequest {
     return this.httpRequest;
   }
 }
+
+export class HttpRequestDirector {
+
+  static makeRequestLogin(username: string, password: string): HttpRequest {
+    let builder: BuilderHttpRequest = new BuilderHttpRequest();
+    builder.setUrl("http://10.0.0.114:8080/auth/user")
+      .setBody(JSON.stringify({
+        email: username,
+        password: password
+      }))
+      .setHeaders({
+        Accept: "application/json",
+        'Content-Type': "application/json"
+      });
+
+    return builder.getHttpRequest();
+  }
+}
