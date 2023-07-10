@@ -14,7 +14,7 @@ type HttpOption = {
   body: any
 };
 
-class HttpRequest {
+export class HttpRequest {
   public option: HttpOption;
   public url: string;
 
@@ -91,7 +91,7 @@ export class HttpRequestDirector {
 
   static makeRequestLogin(username: string, password: string): HttpRequest {
     let builder: BuilderHttpRequest = new BuilderHttpRequest();
-    builder.setUrl("http://10.0.0.114:8080/auth/user")
+    builder.setUrl("http://10.0.0.114:80/auth/user")
       .setBody(JSON.stringify({
         email: username,
         password: password
@@ -99,7 +99,8 @@ export class HttpRequestDirector {
       .setHeaders({
         Accept: "application/json",
         'Content-Type': "application/json"
-      });
+      })
+      .setMethod(HttpMethod.POST);
 
     return builder.getHttpRequest();
   }

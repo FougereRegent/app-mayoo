@@ -1,9 +1,11 @@
+import { BuilderHttpRequest, HttpRequest, HttpRequestDirector } from "./HttpRequest";
+
 type Credentials = {
   username: string,
   password: string
 };
 
-interface IServiceToken {
+export interface IServiceToken {
   getToken(credential: Credentials): string
 }
 
@@ -36,8 +38,16 @@ export class ProxyServiceToken implements IServiceToken {
   }
 }
 
-class ServiceToken implements IServiceToken {
+export class ServiceToken implements IServiceToken {
   getToken(credential: Credentials): string {
+    let request: HttpRequest = HttpRequestDirector.makeRequestLogin(credential.username, credential.password);
+    fetch(request.url, request.option)
+      .then(response => {
+        console.log(response.status);
+      })
+      .catch(error => {
+        console.error(error);
+      });
     return "";
   }
 }

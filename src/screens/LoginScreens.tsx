@@ -3,6 +3,7 @@ import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import Logo from "../components/LogoComponents";
 import Textbox, { TypeTextBox } from "../components/TextboxComponents";
 import OwnButton from "../components/ButtonComponents";
+import { IServiceToken, ProxyServiceToken, ServiceToken } from "../utils/GetData";
 
 const LoginScreen = (props: any) => {
   return (
@@ -13,7 +14,13 @@ const LoginScreen = (props: any) => {
           <Textbox mode={TypeTextBox.CREDENTIALS} />
           <Textbox mode={TypeTextBox.PASSWORD} />
         </View>
-        <OwnButton action={() => props.navigation.navigate('test')} name="Connexion" />
+        <OwnButton action={() => {
+          let service: IServiceToken = new ProxyServiceToken(new ServiceToken());
+          service.getToken({
+            username: "damien.venant@outlook.com",
+            password: "azerty12345"
+          })
+        }} name="Connexion" />
       </View>
     </View>
   );
