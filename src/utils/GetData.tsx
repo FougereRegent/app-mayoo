@@ -1,3 +1,4 @@
+import Unauthorized from "./CustomExceptions/Unauthorized";
 import { BuilderHttpRequest, HttpRequest, HttpRequestDirector } from "./HttpRequest";
 
 type Credentials = {
@@ -5,10 +6,13 @@ type Credentials = {
   password: string
 };
 
-export interface IServiceToken {
-  getToken(credential: Credentials): string
+type AuthentificationResponse = {
+  token: string
 }
 
+export interface IServiceToken {
+  getToken(credential: Credentials): Promise<string>
+}
 
 export class ProxyServiceToken implements IServiceToken {
   private static credentials?: Credentials;
@@ -23,31 +27,36 @@ export class ProxyServiceToken implements IServiceToken {
     this.service = service;
   }
 
-  getToken(credential: Credentials): string {
+  async getToken(credential: Credentials): Promise<string> {
+    let result_token: string = "";
     if (this.checkIfTokenExist(credential)) {
       return ProxyServiceToken.token;
     }
 
-    let result_token: string = this.service.getToken(credential);
-    if (result_token !== "") {
-      ProxyServiceToken.token = result_token;
-      ProxyServiceToken.credentials = credential;
-      return "";
+    try {
+      result_token = await this.service.getToken(credential);
     }
+    catch (error) {
+      throw error;
+    }
+
+    ProxyServiceToken.token = result_token;
+    ProxyServiceToken.credentials = credential;
+
     return ProxyServiceToken.token;
   }
 }
 
 export class ServiceToken implements IServiceToken {
-  getToken(credential: Credentials): string {
+  async getToken(credential: Credentials): Promise<string> {
     let request: HttpRequest = HttpRequestDirector.makeRequestLogin(credential.username, credential.password);
-    fetch(request.url, request.option)
-      .then(response => {
-        console.log(response.status);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    return "";
+    let response = await fetch(request.url, request.option);
+    if (response.status == 404)
+      throw new NotFound();
+    if (response.status == 401)
+      throw new Unauthorized("Pas de token valid");
+
+    let token: AuthentificationResponse | any = await response.json();
+    return token.token;
   }
 }
