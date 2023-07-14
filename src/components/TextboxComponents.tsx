@@ -8,7 +8,8 @@ export enum TypeTextBox {
 };
 
 type TextboxProps = {
-  mode: TypeTextBox
+  mode: TypeTextBox,
+  onChangeString: (string: string) => void
 }
 
 const Textbox = (props: TextboxProps) => {
@@ -19,14 +20,16 @@ const Textbox = (props: TextboxProps) => {
       result = (
         <View style={styles.container}>
           <TextInput
-            onChangeText={newText => setText(newText)}
+            onChangeText={newText => {
+              setText(newText);
+              props.onChangeString(newText)
+            }}
             defaultValue={text}
             style={styles.textbox} />
         </View>
       );
       break;
     case TypeTextBox.PASSWORD:
-      const [password, setPassword] = useState('');
       result = (
         <View style={styles.container}>
           <Image source={require('../../assets/mayoo/lock.png')}
@@ -35,6 +38,7 @@ const Textbox = (props: TextboxProps) => {
             placeholder='Mot de passe'
             onChangeText={newText => {
               setText(newText);
+              props.onChangeString(newText);
             }}
             secureTextEntry={true}
             defaultValue={text}
@@ -49,7 +53,10 @@ const Textbox = (props: TextboxProps) => {
             style={styles.img} />
           <TextInput
             placeholder='Identifiant'
-            onChangeText={newText => { setText(newText); }}
+            onChangeText={newText => {
+              setText(newText);
+              props.onChangeString(newText);
+            }}
             value={text}
             style={styles.textbox} />
         </View>
