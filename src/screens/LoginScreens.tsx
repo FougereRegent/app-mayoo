@@ -5,6 +5,8 @@ import Textbox, { TypeTextBox } from "../components/TextboxComponents";
 import OwnButton from "../components/ButtonComponents";
 import { IServiceToken, ProxyServiceToken, ServiceToken } from "../utils/GetData";
 
+
+//TODO : Change arrow function to class.
 const LoginScreen = (props: any) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,12 +18,23 @@ const LoginScreen = (props: any) => {
           <Textbox mode={TypeTextBox.CREDENTIALS} onChangeString={(text: string) => setUsername(text)} />
           <Textbox mode={TypeTextBox.PASSWORD} onChangeString={(text: string) => setPassword(text)} />
         </View>
-        <OwnButton action={() => {
+        <OwnButton action={async () => {
+
           let service: IServiceToken = new ProxyServiceToken(new ServiceToken());
-          service.getToken({
-            username: "damien.venant@outlook.com",
-            password: "azerty12345"
-          })
+          console.log(process.env);
+
+          try {
+              let token = await service.getToken({
+                username: username,
+                password: password
+              });
+
+              console.log(token);
+          }
+          catch(error) {
+            console.log(error); 
+          }
+
         }} name="Connexion" />
       </View>
     </View>

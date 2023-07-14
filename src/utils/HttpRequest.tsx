@@ -91,7 +91,7 @@ export class HttpRequestDirector {
 
   static makeRequestLogin(username: string, password: string): HttpRequest {
     let builder: BuilderHttpRequest = new BuilderHttpRequest();
-    builder.setUrl("http://10.0.0.114:80/auth/user")
+    builder.setUrl("http://192.168.1.114:80/auth/user")
       .setBody(JSON.stringify({
         email: username,
         password: password

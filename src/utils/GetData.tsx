@@ -1,3 +1,4 @@
+import { useNavigationBuilder } from "@react-navigation/native";
 import Unauthorized from "./CustomExceptions/Unauthorized";
 import { BuilderHttpRequest, HttpRequest, HttpRequestDirector } from "./HttpRequest";
 
@@ -20,7 +21,7 @@ export class ProxyServiceToken implements IServiceToken {
   private service: IServiceToken;
 
   private checkIfTokenExist(credential: Credentials): boolean {
-    return false;
+    return ProxyServiceToken.token != "" && ProxyServiceToken.token != undefined;
   }
 
   constructor(service: IServiceToken) {
@@ -51,9 +52,10 @@ export class ServiceToken implements IServiceToken {
   async getToken(credential: Credentials): Promise<string> {
     let request: HttpRequest = HttpRequestDirector.makeRequestLogin(credential.username, credential.password);
     let response = await fetch(request.url, request.option);
+
     if (response.status == 404)
       throw new NotFound();
-    if (response.status == 401)
+    if (response.status == 403)
       throw new Unauthorized("Pas de token valid");
 
     let token: AuthentificationResponse | any = await response.json();

@@ -11,6 +11,7 @@ COPY ./tsconfig.json .
 
 RUN npm install
 
+COPY .env .
 COPY ./assets assets
 COPY ./src src
 COPY ./App.tsx .
