@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 type ErrorProps = {
   message: string,
@@ -10,11 +10,21 @@ const ErrorComponent = (props: ErrorProps) => {
   const displayValue: any = props.isVisible ? "flex" : "none";
   return (
     <View style={{ display: displayValue }}>
-      <Text>
+      <Text style={style.textStyle}>
         {props.message}
       </Text>
     </View>
   );
 };
+
+
+const style: any = StyleSheet.create(
+  {
+    textStyle: {
+      color: "red",
+      fontSize: 16
+    }
+  }
+);
 
 export default ErrorComponent;
