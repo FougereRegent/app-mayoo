@@ -21,7 +21,9 @@ export class ProxyServiceToken implements IServiceToken {
   private service: IServiceToken;
 
   private checkIfTokenExist(credential: Credentials): boolean {
-    return ProxyServiceToken.token != "" && ProxyServiceToken.token != undefined;
+    let checkCredentials: boolean = ProxyServiceToken.credentials != null;
+    let checkToken: boolean = ProxyServiceToken.token != "" && ProxyServiceToken.token != undefined;
+    return checkCredentials && checkToken;
   }
 
   constructor(service: IServiceToken) {
