@@ -23,7 +23,7 @@ const WelcomeScreen = ({ navigation }: any) => {
         </TextBox>
       </View>
       <View style={styles.containerButton}>
-        <OwnButton name="Continuer" action={() => {
+        <OwnButton name="Suivant" action={() => {
           navigation.navigate("Login")
         }} />
       </View>
