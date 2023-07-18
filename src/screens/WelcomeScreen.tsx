@@ -24,7 +24,7 @@ const WelcomeScreen = ({ navigation }: any) => {
       </View>
       <View style={styles.containerButton}>
         <OwnButton name="Suivant" action={() => {
-          navigation.navigate("Login")
+          navigation.navigate("AllergeneScreen")
         }} />
       </View>
     </View >
