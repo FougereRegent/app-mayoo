@@ -34,7 +34,7 @@ const AllergeneScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red"
+    backgroundColor: "#FF6847"
   },
   logoView: {
     flex: 1,
