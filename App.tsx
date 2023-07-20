@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/screens/LoginScreens';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import AllergeneScreen from './src/screens/AllergeneScreen';
+import PresentDayAtLunchRoomScreen from './src/screens/PresentDayAtLunchRoomScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,10 @@ export default function App() {
         <Stack.Screen
           name="AllergeneScreen"
           component={AllergeneScreen}
+        />
+        <Stack.Screen
+          name="PresentDayAtLunchRoomScreen"
+          component={PresentDayAtLunchRoomScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

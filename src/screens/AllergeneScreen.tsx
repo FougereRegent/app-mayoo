@@ -37,7 +37,7 @@ const AllergeneScreen = ({ navigation }: any) => {
         <AllergeneIconComponents path={require("../../assets/allergenes/celeri.png")} name="celeri" />
       </View>
       <View style={styles.validationView}>
-        <OwnButton name="Suivant" action={() => { }} />
+        <OwnButton name="Suivant" action={() => { navigation.navigate("PresentDayAtLunchRoomScreen") }} />
       </View>
     </View>
   );
