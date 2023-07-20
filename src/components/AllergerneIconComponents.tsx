@@ -3,8 +3,9 @@ import { View, Image, StyleSheet } from "react-native";
 
 
 type propsAllergeneComponents = {
+  id: number,
   name: string,
-  pathUrl: string
+  path: string
 };
 
 const AllergeneIconComponents = (props: propsAllergeneComponents) => {
@@ -14,7 +15,7 @@ const AllergeneIconComponents = (props: propsAllergeneComponents) => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require(props.pathUrl)} />
+        source={require(props.path)} />
     </View>
   );
 
